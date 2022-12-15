@@ -1,12 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 
-import React from 'react';
+import * as React from 'react';
+// import colors from './assets/colors/colors';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+import Home from './components/home';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 import {
   SafeAreaView,
@@ -19,29 +18,25 @@ import {
 } from 'react-native';
 
 
-
+const Stack = createNativeStackNavigator();
 
 const App = () => {
- 
-  
-
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
-      <Text style = {{ color: 'white', fontSize: 24}}>AwesomeProject</Text>
-    
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options = {{headerShown : false}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  backgroundStyle : {
-   backgroundColor: 'red',
-   flex: 1,
-   alignItems:"center",
-   justifyContent: 'center'
-   
+  backgroundStyle: {
+    backgroundColor: 'red',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
- 
 });
 
 export default App;
