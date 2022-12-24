@@ -25,9 +25,10 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  TextInput
 } from 'react-native';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const renderCategoryItems = ({item}) => {
     return (
       <View
@@ -89,7 +90,7 @@ const Home = () => {
         <View style={styles.searchWrapper}>
           <Feather name="search" size={16} color={colors.textDark} />
           <View style={styles.search}>
-            <Text style={styles.searchText}>Search...</Text>
+            <TextInput style={styles.searchText}  placeholder="Search..."/>
           </View>
         </View>
         {/* catagories wrapper */}
@@ -111,7 +112,10 @@ const Home = () => {
         <View style={styles.popularWrapper}>
           <Text style={styles.popularTitle}>Popular</Text>
           {popularData.map(item => (
-            <TouchableOpacity key={item.id}>
+            <TouchableOpacity key={item.id}  onPress={() => navigation.navigate('Details', {
+              itemId: item.id,
+             
+            })}>
               <View style={styles.popularContainer}>
                 <View style={styles.mainContainer}>
                   <View style={styles.popularMainTitleWrapper}>
@@ -214,9 +218,8 @@ const styles = StyleSheet.create({
   },
   searchText: {
     fontSize: 14,
-
     fontFamily: 'Montserrat-SemiBold',
-    color: colors.textLight,
+    color: colors.textDark,
   },
 
   catagorieshWrapper: {
@@ -371,5 +374,7 @@ const styles = StyleSheet.create({
     color: colors.black,
   },
 });
+
+
 
 export default Home;
