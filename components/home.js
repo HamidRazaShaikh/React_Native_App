@@ -13,6 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CategoriesData from '../assets/data/catagoriesData';
 import popularData from '../assets/data/popularData';
+import MenuIcon from '../components/menu';
 
 import {
   SafeAreaView,
@@ -25,12 +26,15 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  TouchableHighlight,
 } from 'react-native';
 
-const Home = ({ navigation }) => {
+const Home = ({navigation}) => {
   const renderCategoryItems = ({item}) => {
     return (
+      <TouchableOpacity
+     >
       <View
         style={[
           styles.categoriesItemWrapper,
@@ -39,6 +43,7 @@ const Home = ({ navigation }) => {
             marginLeft: item.id == 1 ? 0 : 20,
           },
         ]}>
+          
         <Image source={item.image} style={styles.categoriesImage} />
         <Text style={styles.categoriesText}>{item.title}</Text>
         <View
@@ -56,6 +61,7 @@ const Home = ({ navigation }) => {
           />
         </View>
       </View>
+      </TouchableOpacity>
     );
   };
   return (
@@ -70,12 +76,8 @@ const Home = ({ navigation }) => {
               source={require('../assets/images/profile.png')}
               style={styles.profileImage}
             />
-            <Feather
-              name="menu"
-              size={16}
-              color={colors.textDark}
-              style={styles.menuIcon}
-            />
+
+            <MenuIcon />
           </View>
         </SafeAreaView>
 
@@ -90,7 +92,7 @@ const Home = ({ navigation }) => {
         <View style={styles.searchWrapper}>
           <Feather name="search" size={16} color={colors.textDark} />
           <View style={styles.search}>
-            <TextInput style={styles.searchText}  placeholder="Search..."/>
+            <TextInput style={styles.searchText} placeholder="Search..." />
           </View>
         </View>
         {/* catagories wrapper */}
@@ -112,10 +114,13 @@ const Home = ({ navigation }) => {
         <View style={styles.popularWrapper}>
           <Text style={styles.popularTitle}>Popular</Text>
           {popularData.map(item => (
-            <TouchableOpacity key={item.id}  onPress={() => navigation.navigate('Details', {
-              itemId: item.id,
-             
-            })}>
+            <TouchableOpacity
+              key={item.id}
+              onPress={() =>
+                navigation.navigate('Details', {
+                  itemId: item.id,
+                })
+              }>
               <View style={styles.popularContainer}>
                 <View style={styles.mainContainer}>
                   <View style={styles.popularMainTitleWrapper}>
@@ -333,7 +338,7 @@ const styles = StyleSheet.create({
 
     fontFamily: 'Montserrat-Medium',
     color: colors.textLight,
-    marginTop: 5
+    marginTop: 5,
   },
 
   popularImageWrapper: {
@@ -374,7 +379,5 @@ const styles = StyleSheet.create({
     color: colors.black,
   },
 });
-
-
 
 export default Home;
